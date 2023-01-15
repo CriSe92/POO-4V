@@ -1,5 +1,7 @@
 package esempi;
 
+import util.Mat;
+
 public class Frazione {
 	private int num, den;
 	public static int contatore = 0;
@@ -42,22 +44,8 @@ public class Frazione {
 		this.den = den;
 	}
 
-	private int MCD(int a, int b) {
-		int resto;
-		do {
-			resto = a % b;
-			a = b;
-			b = resto;
-		} while (resto != 0);
-		return a;
-	}
-
-	private int mcm(int a, int b) {
-		return (a * b) / MCD(a, b);
-	}
-
 	public Frazione semplifica() {
-		return new Frazione(num / MCD(num, den), den / MCD(num, den));
+		return new Frazione(num / Mat.MCD(num, den), den / Mat.MCD(num, den));
 	}
 
 	public Frazione reciproca() {
@@ -69,7 +57,7 @@ public class Frazione {
 	}
 
 	public Frazione somma(Frazione g) {
-		int den = mcm(this.den, g.getDen());
+		int den = Mat.mcm(this.den, g.getDen());
 		int num1 = num * (den / this.den);
 		int num2 = g.getNum() * (den / g.getDen());
 		return new Frazione(num1 + num2, den);
@@ -77,7 +65,7 @@ public class Frazione {
 	}
 
 	public Frazione sottrai(Frazione g) {
-		int den = mcm(this.den, g.getDen());
+		int den = Mat.mcm(this.den, g.getDen());
 		int num1 = num * (den / this.den);
 		int num2 = g.getNum() * (den / g.getDen());
 		return new Frazione(num1 - num2, den);
@@ -129,5 +117,6 @@ public class Frazione {
 		System.out.print(g.toString());
 		g = g.semplifica();
 		System.out.print("\t" + g.toString());
+		Math.abs(0);
 	}
 }
