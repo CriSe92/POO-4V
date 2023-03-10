@@ -1,39 +1,42 @@
 package giochi;
 
-public class Carta {
-	
-	private int seme;
-    private int valore;
-    
-    public Carta(int s, int v) {
-    	this.seme = s;
-    	this.valore = v;
+public class Carta{
+  private int seme;//da 0 a 3
+  private int valore;//da 1 a 10
+  
+  public Carta(int s, int v){
+    if(v<1 || v>10)
+      throw new RuntimeException("Valore non valido!");
+    if(s<0 || s>3)
+      throw new RuntimeException("Seme non valido!");
+    this.seme = s;
+    this.valore = v;
+  }
+  
+  public int getValore(){
+    return valore;
+  }
+  
+  public int getSeme(){
+    return seme;
+  }
+  
+  private String getNomeSeme(){
+    switch(seme){
+      case 0: return "Denari";
+      case 1: return "Spade";
+      case 2: return "Coppe";
+      case 3: return "Bastoni";
+      default: return "Seme non valido";
     }
-    
-    private String numToSeme(int numSeme) {
-        String seme = null;
-    	switch(numSeme){
-        case 0:
-            seme="spade";//spade
-            break;
-        case 1:
-            seme="bastoni";//bastoni
-            break;
-        case 2:
-            seme="denari";//denari
-            break;
-        case 3:
-            seme="coppe";//coppe
-            break;
-    }
-    	return seme;
-   }
-   
-    public int getValore(){return valore;}
-    
-    public int getSeme(){return seme;}
-    
-    public String toString() {
-    	return valore+""+numToSeme(seme);
-    }
+  }
+  
+  public String toString(){
+    return valore+" "+getNomeSeme();
+  }
+  
+  public static void main(String[] args){
+    Carta c = new Carta(0,5);
+    System.out.println(c);
+  }
 }
